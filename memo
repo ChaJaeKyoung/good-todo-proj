@@ -1,0 +1,37 @@
+23-02-06
+간단한 Todo List
+
+react-responsive 사용
+
+테마색 지정해서 관리
+월간 달력지원
+주간 달력지원
+일간 오늘 할일지원
+
+할일을 다 했을 경우 안보이게 설정 가능
+삭제는 편집버튼을 누르고 수정
+할일 입력 시 기본 양식 제공
+
+데이터는 로컬스토리지에 저장
+id는 uuid
+
+🎈필요한 라이브러리
+id 라이브러리
+* uuid
+
+날짜,요일,시간 라이브러리 
+* date-fns 라이브러리
+cf) 달력관련 블로그 : https://sennieworld.tistory.com/74
+
+아이콘 라이브러리 - todo project
+* react-icons
+
+스타일 라이브러리 - chapter15 , todo
+* styled-reset
+* styled-components
+
+라우터 라이브러리 - chapter16
+* react-router-dom
+
+리엑트 responsive 라이브러리 - chapter15
+* react-responsive
