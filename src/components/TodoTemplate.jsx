@@ -30,8 +30,16 @@ function TodoTemplate(props) {
     <TodoTemplateWrapper>
       <div>{year}</div>
       {/* <div className="app-week">{week}</div> */}
-      <div className="app-today">{today}</div>
-      <div className="todo-contents">{contents}</div>
+      <div className="app-today">
+      <div>
+              <span>💚</span>
+              {dateFns.format(new Date(), 'MM-dd')}
+              &nbsp; 오늘의 할 일 &nbsp;
+              <span>🎈</span>
+              
+            </div>
+      </div>
+      <div className="todo-contents">{childeren}</div>
     </TodoTemplateWrapper>
   );
 }
