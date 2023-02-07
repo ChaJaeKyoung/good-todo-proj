@@ -7,8 +7,8 @@ import { Calender } from './Calendar';
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
-  // <App />
-  <Calender />
+  <App />
+  // <Calender />
 );
 
 // If you want to start measuring performance in your app, pass a function

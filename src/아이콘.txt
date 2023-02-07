@@ -1,0 +1,9 @@
+토글 아이콘
+
+BsToggleOff
+BsToggleOn
+
+체크박스 아이콘
+BsSquare
+BsCheckSquare
+BsCheckSquareFill

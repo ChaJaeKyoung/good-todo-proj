@@ -1,100 +1,100 @@
-// components-schedule.style.scss
-@use "assets/styles/_theme.scss";
-@use "assets/styles/_common.scss" as common;
+// // components-schedule.style.scss
+// @use "assets/styles/_theme.scss";
+// @use "assets/styles/_common.scss" as common;
 
-.schedule-calendar {
-    @include common.size(35%, 94%);
-    @include common.flex-column(flex-start, center);
-    font-family: theme.$english-font;
-    .text-today {
-        @include common.size(80%, fit-content);
-        @include common.flex-row(space-between, baseline);
-        color: theme.$main-color;
-        margin-bottom: -1.2%;
-        .text-year {
-            @include common.font(
-                rgb(99, 22, 22),
-                theme.$english-font,
-                0.8em,
-                700
-            );
-        }
-        .text-current:hover {
-            @include common.hover-event();
-            color: rgb(99, 22, 22);
-            transform: scale(1.03);
-        }
-    }
-    .days {
-        @include common.size(85%, fit-content);
-        @include common.flex-row(flex-start, center);
-        font-size: 0.5em;
-        margin-bottom: 2%;
-        .col {
-            @include common.size(13%, 100%);
-            @include common.flex-column(flex-end, center);
-            margin-right: 1%;
-            background: transparentize(theme.$step-color, 0.4);
-            border: 1px solid transparentize(theme.$step-color, 0.6);
-            border-radius: 4px;
-        }
-    }
-    .calendar-list {
-        @include common.size(90%, 90%);
-        @include common.flex();
-        overflow-y: scroll;
-        flex-wrap: wrap;
-        .calendar__item {
-            @include common.size(90%, 50%);
-            padding: 2%;
-            padding-top: 8%;
-            margin-bottom: 5%;
-            .header {
-                @include common.size(100%, 10%);
-                text-align: center;
-                font-size: 1em;
-                color: theme.$main-color;
-            }
-            .body {
-                @include common.size(100%, 89%);
-                @include common.flex-column();
-                .row {
-                    @include common.size(100%, 100%);
-                    @include common.flex-row(space-between, center);
-                    .col {
-                        @include common.size(15%, 100%);
-                        @include common.flex-column(flex-start, center);
-                        font-size: 0.5em;
-                        span {
-                            z-index: 10000;
-                            padding-top: 5px;
-                        }
-                        .not-valid {
-                            color: theme.$gray-color;
-                        }
-                        .img {
-                            @include common.size(100%, 100%);
-                            margin: 0% 0 0 -17%;
-                            border-radius: 2px;
-                        }
-                        .img-undefined {
-                            @include common.size(80%, 80%);
-                            margin: 10% 0 0 -4%;
-                            opacity: 0.2;
-                        }
-                        .today {
-                            color: theme.$main-color;
-                            font-weight: 700;
-                        }
-                    }
-                    .col.cell.selected {
-                        @include common.shape(theme.$step-color, none, 10%);
-                    }
-                }
-            }
-        }
-    }
-    .calendar-list::-webkit-scrollbar {
-        display: none;
-    }
-}
+// .schedule-calendar {
+//     @include common.size(35%, 94%);
+//     @include common.flex-column(flex-start, center);
+//     font-family: theme.$english-font;
+//     .text-today {
+//         @include common.size(80%, fit-content);
+//         @include common.flex-row(space-between, baseline);
+//         color: theme.$main-color;
+//         margin-bottom: -1.2%;
+//         .text-year {
+//             @include common.font(
+//                 rgb(99, 22, 22),
+//                 theme.$english-font,
+//                 0.8em,
+//                 700
+//             );
+//         }
+//         .text-current:hover {
+//             @include common.hover-event();
+//             color: rgb(99, 22, 22);
+//             transform: scale(1.03);
+//         }
+//     }
+//     .days {
+//         @include common.size(85%, fit-content);
+//         @include common.flex-row(flex-start, center);
+//         font-size: 0.5em;
+//         margin-bottom: 2%;
+//         .col {
+//             @include common.size(13%, 100%);
+//             @include common.flex-column(flex-end, center);
+//             margin-right: 1%;
+//             background: transparentize(theme.$step-color, 0.4);
+//             border: 1px solid transparentize(theme.$step-color, 0.6);
+//             border-radius: 4px;
+//         }
+//     }
+//     .calendar-list {
+//         @include common.size(90%, 90%);
+//         @include common.flex();
+//         overflow-y: scroll;
+//         flex-wrap: wrap;
+//         .calendar__item {
+//             @include common.size(90%, 50%);
+//             padding: 2%;
+//             padding-top: 8%;
+//             margin-bottom: 5%;
+//             .header {
+//                 @include common.size(100%, 10%);
+//                 text-align: center;
+//                 font-size: 1em;
+//                 color: theme.$main-color;
+//             }
+//             .body {
+//                 @include common.size(100%, 89%);
+//                 @include common.flex-column();
+//                 .row {
+//                     @include common.size(100%, 100%);
+//                     @include common.flex-row(space-between, center);
+//                     .col {
+//                         @include common.size(15%, 100%);
+//                         @include common.flex-column(flex-start, center);
+//                         font-size: 0.5em;
+//                         span {
+//                             z-index: 10000;
+//                             padding-top: 5px;
+//                         }
+//                         .not-valid {
+//                             color: theme.$gray-color;
+//                         }
+//                         .img {
+//                             @include common.size(100%, 100%);
+//                             margin: 0% 0 0 -17%;
+//                             border-radius: 2px;
+//                         }
+//                         .img-undefined {
+//                             @include common.size(80%, 80%);
+//                             margin: 10% 0 0 -4%;
+//                             opacity: 0.2;
+//                         }
+//                         .today {
+//                             color: theme.$main-color;
+//                             font-weight: 700;
+//                         }
+//                     }
+//                     .col.cell.selected {
+//                         @include common.shape(theme.$step-color, none, 10%);
+//                     }
+//                 }
+//             }
+//         }
+//     }
+//     .calendar-list::-webkit-scrollbar {
+//         display: none;
+//     }
+// }
