@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import styled from "styled-components";
+import { MdAdd as AddIcon, MdOutlineInsertChart } from "react-icons/md";
 
 const TodoInserWrapper = styled.form`
   display: flex;
@@ -51,7 +52,7 @@ function TodoInsert({ onInsert }) {
   };
 
   return (
-    <TodoInserWrapper>
+    <TodoInserWrapper onSubmit={handleSubmit}>
       <StyledInput 
         type="text"
         placeholder="할 일을 입력해 주세요"
@@ -60,7 +61,11 @@ function TodoInsert({ onInsert }) {
       />
       <StyledButton 
         type="submit"
-      />
+      >
+        <AddIcon />  
+      </StyledButton> 
+        
+    
     </TodoInserWrapper>
   );
 }

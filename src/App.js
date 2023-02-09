@@ -89,7 +89,7 @@ function App(props) {
 
   // 로컬스토리지로 바뀐 배열 업데이트 해주기
   useEffect(() => {
-    localStorage.setItem(todos);
+    localStorage.setItem('todos', JSON.stringify(todos));
   }, [todos]);
 
   // id값은 렌더링되는 정보가 아니기 때문에 ref사용
@@ -106,7 +106,7 @@ function App(props) {
     };
     setTodos(todos.concat(todo)); // 새로운 배열 반환함
 
-    nextId.current += 1; // nextId에 1씩 더하기
+    nextId.current ++ ; // nextId에 1씩 더하기
 
     // uuid 로컬 스토리지에 저장
     // set.Item, get.Item
@@ -147,27 +147,27 @@ function App(props) {
         <Reset/>
         <GlobalStyle />
         <TodoTemplate
-          // year = {
-          //   <div>
-          //     {dateFns.format(new Date(), 'yyyy')}
-          //   </div>
-          // }
-          // // week = {
-          //   // 주간 달력을 만들고 싶었으나 ,, 너무 어려워서 일단 pass
-          // // } 
-          // today = {
-          //   <div>
-          //     <span>💚</span>
-          //     {dateFns.format(new Date(), 'MM-dd')}
-          //     &nbsp; 오늘의 할 일 &nbsp;
-          //     <span>🎈</span>
+          year = {
+            <div>
+              {dateFns.format(new Date(), 'yyyy')}
+            </div>
+          }
+          // week = {
+            // 주간 달력을 만들고 싶었으나 ,, 너무 어려워서 일단 pass
+          // } 
+          today = {
+            <div>
+              <span>💚</span>
+              {dateFns.format(new Date(), 'MM-dd')}
+              &nbsp; 오늘의 할 일 &nbsp;
+              <span>🎈</span>
               
-          //   </div>
-          // }
+            </div>
+          }
         >
           <TodoWeek />
-          <TodoInsert />
-          <TodoList />
+          <TodoInsert onInsert={handleInsert} />
+          <TodoList todos={todos} onRemove={handleRemove} onToggle={handleToggle} />
         </TodoTemplate>
       </ThemeProvider>
     </>
