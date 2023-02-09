@@ -1,6 +1,6 @@
 import React from 'react';
 import styled, { css } from "styled-components";
-import { BsSquare as UncheckBox, BsCheckSquareFill as CheckedBox BsTrash as Trash, BsPencilSquare as Pencil } from "react-icons";
+import { BsSquare as UncheckBox, BsCheckSquareFill as CheckedBox, BsTrash as Trash, BsPencilSquare as Pencil } from "react-icons/bs";
 
 const TodoListWrapper = styled.div`
 padding: 1rem;
@@ -69,13 +69,17 @@ function TodoListItem(props) {
         <Checkbox checked={checked} onClic={ ()=> { onToggle(id); }}>
           { checked ? <UncheckBox /> : <CheckedBox /> }
         </Checkbox>
-        <Text checked={}>{text}</Text>
-        <Modify onClick={}>
-          {/* 수정버튼을 누르면, 취소수정 버튼이 등장하도록 */}
+        <Text checked={onToggle}>{text}</Text>
+        {/* 수정버튼을 누르면, 
+          1. 취소수정 버튼이 등장 
+          2. 해당 id에 저장된text 데이터로 리스트 아이템에 input렌더링 커서는깜빡거리게 마지막 text오른쪽 옆에서 포커싱 
+        */}
+        
+        {/* <Modify onClick={}>
           <Pencil />
-        </Modify>
+        </Modify> */}
         <Remove onClick={() => { onRemove(id);}}>
-          <Tresh />
+          <Trash />
         </Remove>
       </TodoListWrapper>
     </div>

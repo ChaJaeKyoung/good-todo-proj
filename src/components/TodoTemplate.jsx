@@ -24,6 +24,7 @@ const TodoTemplateWrapper = styled.div`
 `;
 
 function TodoTemplate(props) {
+  const { children } = props;
   const { year, week, today, contents } = props;
   {console.log(week);}
   return (
@@ -38,7 +39,7 @@ function TodoTemplate(props) {
         <span>🎈</span> */}
       </div>
       </div>
-      <div className="todo-contents">{childeren}</div>
+      <div className="todo-contents">{ children }</div>
     </TodoTemplateWrapper>
   );
 }

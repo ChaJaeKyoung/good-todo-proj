@@ -1,5 +1,5 @@
-import React from 'react';
-
+import React, { useState } from 'react';
+import styled from "styled-components";
 
 const TodoInserWrapper = styled.form`
   display: flex;
@@ -33,7 +33,7 @@ const StyledButton = styled.button`
 `;
 
 
-function TodoInsert(props) {
+function TodoInsert({ onInsert }) {
   // 제어컴포넌트
   const [value, setValue] = useState('');
   

@@ -1,4 +1,4 @@
-import React, { useEffect, useRef, useState } from 'react';
+import React, { useCallback, useEffect, useRef, useState } from 'react';
 import { Reset } from "styled-reset";
 import { createGlobalStyle, ThemeProvider } from "styled-components";
 import { useMediaQuery } from "react-responsive";
@@ -8,6 +8,7 @@ import {ko} from "date-fns/locale";
 import TodoTemplate from './components/TodoTemplate';
 import TodoList from './components/TodoList';
 import TodoInsert from './components/TodoInsert';
+import TodoWeek from './components/TodoWeek';
 
 // 참고) 반응형 라이브러리 사용
 // 조건부 렌더링
@@ -86,6 +87,11 @@ function App(props) {
     setTodos(dbTodos);
   }, []);
 
+  // 로컬스토리지로 바뀐 배열 업데이트 해주기
+  useEffect(() => {
+    localStorage.setItem(todos);
+  }, [todos]);
+
   // id값은 렌더링되는 정보가 아니기 때문에 ref사용
   // 단순히 새로운 항목을 만들 때 참조되는 값임
   const nextId = useRef();
@@ -106,7 +112,7 @@ function App(props) {
     // set.Item, get.Item
     // setItem('이름', 들어갈 값)
     // 배열을 JSON으로 
-    localStorage.setItem('todos', JSON.stringify(todos.concat(todo)));
+    // localStorage.setItem('todos', JSON.stringify(todos.concat(todo)));
   }, [todos]);
 
   // todos 배열에서 id로 항목을 지우기 위한 handleRemove() 함수 정의
@@ -114,7 +120,7 @@ function App(props) {
   const handleRemove = useCallback((id) => {
     // true값만 모아 새로운 배열 만듦
     setTodos(todos.filter((todo) => todo.id !== id ));
-    localStorage.setItem('todos', JSON.stringify(todos.filter((todo) => todo.id !== id )));
+    // localStorage.setItem('todos', JSON.stringify(todos.filter((todo) => todo.id !== id )));
   }, [todos]);
 
   const handleToggle = useCallback((id) => {
@@ -123,7 +129,16 @@ function App(props) {
       // false: todo객체 그대로 다시 넣어 줌
       todos.map((todo) => todo.id === id ? { ...todo, checked: !todo.checked } : todo )
     );  
-    localStorage.setItem('todos', JSON.stringify(todos.map((todo) => todo.id === id ? { ...todo, checked: !todo.checked } : todo )));
+    // localStorage.setItem('todos', JSON.stringify(todos.map((todo) => todo.id === id ? { ...todo, checked: !todo.checked } : todo )));
+  }, [todos]);
+
+  // 수정 버튼 누르면
+  // 해당리스트 아이템이 활성화되면서
+  // 
+  const handleModify = useCallback((id)=>{
+    setTodos(
+
+    );
   }, [todos]);
 
   return (
@@ -132,30 +147,28 @@ function App(props) {
         <Reset/>
         <GlobalStyle />
         <TodoTemplate
-          year = {
-            <div>
-              {dateFns.format(new Date(), 'yyyy')}
-            </div>
-          }
-          // week = {
-            // 주간 달력을 만들고 싶었으나 ,, 너무 어려워서 일단 pass
-          // } 
-          today = {
-            <div>
-              <span>💚</span>
-              {dateFns.format(new Date(), 'MM-dd')}
-              &nbsp; 오늘의 할 일 &nbsp;
-              <span>🎈</span>
+          // year = {
+          //   <div>
+          //     {dateFns.format(new Date(), 'yyyy')}
+          //   </div>
+          // }
+          // // week = {
+          //   // 주간 달력을 만들고 싶었으나 ,, 너무 어려워서 일단 pass
+          // // } 
+          // today = {
+          //   <div>
+          //     <span>💚</span>
+          //     {dateFns.format(new Date(), 'MM-dd')}
+          //     &nbsp; 오늘의 할 일 &nbsp;
+          //     <span>🎈</span>
               
-            </div>
-          }
+          //   </div>
+          // }
         >
+          <TodoWeek />
           <TodoInsert />
           <TodoList />
         </TodoTemplate>
-        <div>
-          
-        </div>
       </ThemeProvider>
     </>
   );
