@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import { Reset } from "styled-reset";
 import { createGlobalStyle, ThemeProvider } from "styled-components";
 import { useMediaQuery } from "react-responsive";
@@ -7,6 +7,7 @@ import * as dateFns from "date-fns";
 import {ko} from "date-fns/locale";
 import TodoTemplate from './components/TodoTemplate';
 import TodoList from './components/TodoList';
+import TodoInsert from './components/TodoInsert';
 
 // 참고) 반응형 라이브러리 사용
 // 조건부 렌더링
@@ -74,8 +75,57 @@ const GlobalStyle = createGlobalStyle`
 `;
 
 
+
 function App(props) {
-  
+  // 화면에 뿌려줄 todos 상태 
+  const [todos, setTodos] = useState([]);
+
+  // 로컬 스토리지에서 남아있는 객체데이터 가져오기
+  useEffect(() => {
+    const dbTodos = JSON.parse(localStorage.getItem('todos')) || [...todos];
+    setTodos(dbTodos);
+  }, []);
+
+  // id값은 렌더링되는 정보가 아니기 때문에 ref사용
+  // 단순히 새로운 항목을 만들 때 참조되는 값임
+  const nextId = useRef();
+
+  // todos 배열에 새 객체를 추가하기 위한 handleInsert() 함수 정의
+  const handleInsert = useCallback((text) => {
+    const todo = {
+      // uuid를 사용해서 id를 받아오는 방법
+      id: uuidv4(), 
+      text, // key이름 : key이름 일때 key값만 보내줘도 value로 들어감
+      checked: false
+    };
+    setTodos(todos.concat(todo)); // 새로운 배열 반환함
+
+    nextId.current += 1; // nextId에 1씩 더하기
+
+    // uuid 로컬 스토리지에 저장
+    // set.Item, get.Item
+    // setItem('이름', 들어갈 값)
+    // 배열을 JSON으로 
+    localStorage.setItem('todos', JSON.stringify(todos.concat(todo)));
+  }, [todos]);
+
+  // todos 배열에서 id로 항목을 지우기 위한 handleRemove() 함수 정의
+  // 불변성을 지키면서 배열의 요소를 제거해야 할 때 filter()활용
+  const handleRemove = useCallback((id) => {
+    // true값만 모아 새로운 배열 만듦
+    setTodos(todos.filter((todo) => todo.id !== id ));
+    localStorage.setItem('todos', JSON.stringify(todos.filter((todo) => todo.id !== id )));
+  }, [todos]);
+
+  const handleToggle = useCallback((id) => {
+    setTodos(
+      // true: todo객체 그대로 가져와서, id값이 같은 것의 checked속성만 반전시켜서 다시 넣어줌 
+      // false: todo객체 그대로 다시 넣어 줌
+      todos.map((todo) => todo.id === id ? { ...todo, checked: !todo.checked } : todo )
+    );  
+    localStorage.setItem('todos', JSON.stringify(todos.map((todo) => todo.id === id ? { ...todo, checked: !todo.checked } : todo )));
+  }, [todos]);
+
   return (
     <>
       <ThemeProvider theme={theme}>
@@ -100,6 +150,7 @@ function App(props) {
             </div>
           }
         >
+          <TodoInsert />
           <TodoList />
         </TodoTemplate>
         <div>
