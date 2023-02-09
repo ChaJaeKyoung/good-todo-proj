@@ -71,6 +71,7 @@ function TodoListItem(props) {
         </Checkbox>
         <Text checked={}>{text}</Text>
         <Modify onClick={}>
+          {/* 수정버튼을 누르면, 취소수정 버튼이 등장하도록 */}
           <Pencil />
         </Modify>
         <Remove onClick={() => { onRemove(id);}}>
