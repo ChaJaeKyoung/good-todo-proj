@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import styled, { css } from "styled-components";
 import { BsSquare as UncheckBox, BsCheckSquareFill as CheckedBox, BsTrash as Trash, BsPencilSquare as Pencil } from "react-icons/bs";
 
@@ -44,6 +44,13 @@ const Text = styled.div`
   `}
 `;
 
+const TextUpdate = styled.input`
+  // margin-left: 0.5rem;
+  // background-color: black;
+  // flex: 1; // 차지할 수 있는 영역 모두 차지
+`;
+
+
 const Remove = styled.div`
   display: flex;
   align-items: center;
@@ -65,28 +72,49 @@ const Remove = styled.div`
 // 취소버튼- 이전상태로 돌아가기
 // 저장버튼- 바뀐 텍스트 저장하기
 
-// const Modify = styled.div`
-
-// `;
-
+const Modify = styled.div`
+  cursor: pointer;
+`;
 
 function TodoListItem(props) {
-  const { todo: { id, text, checked }, onRemove, onToggle } = props;
+  const { todo: { id, text, checked, modify_check }, onRemove, onToggle, onModify, onModifySubmit, onModifyCancel } = props;
+  
+  const [value, setValue] = useState('');
+  
+  const handleInputChange = (e) => {
+    setValue(e.target.value);
+};
   return (
     <TodoListItemWrapper>
+    
       <Checkbox checked={checked} onClick={ ()=> { onToggle(id); }}>
-        { checked ?  <CheckedBox /> : <UncheckBox />  }
+        { checked ? <CheckedBox /> : <UncheckBox />  }
       </Checkbox>
-      <Text checked={checked}>{text}</Text>
+        {
+          
+          modify_check == true ? 
+          <TextUpdate value={text} onChange={() => console.log("g"+value+"a")}/> : 
+          <Text checked={checked}>{text}</Text>
+        }
+      
       {/* 수정버튼을 누르면, 
         1. 취소수정 버튼이 등장 
         2. 해당 id에 저장된text 데이터로 리스트 아이템에 input렌더링 커서는깜빡거리게 마지막 text오른쪽 옆에서 포커싱 
       */}
       
-      {/* <Modify onClick={() => {}}>
-      </Modify> */}
-        <Pencil />
-      <Remove onClick={() => { onRemove(id);}}>
+      {
+          
+        modify_check == true ? 
+        <>
+        <Modify onClick={() => { onModifySubmit(id, text); }}>수정완료</Modify>
+        <Modify onClick={() => { onModifyCancel(id); }}>취소</Modify> 
+        </> :
+        <Modify onClick={() => { onModify(id, modify_check); }}>
+          <Pencil />
+        </Modify>
+      }
+
+      <Remove onClick={() => { onRemove(id); }}>
         <Trash />
       </Remove>
     </TodoListItemWrapper>

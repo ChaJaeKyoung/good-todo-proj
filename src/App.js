@@ -102,7 +102,8 @@ function App(props) {
       // uuid를 사용해서 id를 받아오는 방법
       id: uuidv4(), 
       text, // key이름 : key이름 일때 key값만 보내줘도 value로 들어감
-      checked: false
+      checked: false,
+      modify_check: false
     };
     setTodos(todos.concat(todo)); // 새로운 배열 반환함
 
@@ -135,9 +136,38 @@ function App(props) {
   // 수정 버튼 누르면
   // 해당리스트 아이템이 활성화되면서
   // 
-  const handleModify = useCallback((id)=>{
+  const handleModify = useCallback((id, modify_check)=>{
     setTodos(
+      todos.map((todo) => {
+        if (todo.id === id) {
+          return { ...todo, modify_check: true };
+      }
+      return { ...todo };
+      })
+    );
+  }, [todos]);
 
+  /* 수정 완료 */
+  const handleModifySubmit = useCallback((id, text)=>{
+    setTodos(
+      todos.map((todo) => {
+        if (todo.id === id) {
+          return { ...todo, text: text, modify_check: false };
+      }
+      return { ...todo };
+      })
+    );
+  }, [todos]);
+
+  /* 수정 취소 */
+  const handleModifyCancel = useCallback((id)=>{
+    setTodos(
+      todos.map((todo) => {
+        if (todo.id === id) {
+          return { ...todo, modify_check: false };
+      }
+      return { ...todo };
+      })
     );
   }, [todos]);
 
@@ -167,7 +197,7 @@ function App(props) {
         >
           <TodoWeek />
           <TodoInsert onInsert={handleInsert} />
-          <TodoList todos={todos} onRemove={handleRemove} onToggle={handleToggle} />
+          <TodoList todos={todos} onRemove={handleRemove} onToggle={handleToggle} onModify={handleModify} onModifySubmit={handleModifySubmit} onModifyCancel={handleModifyCancel}/>
         </TodoTemplate>
       </ThemeProvider>
     </>
