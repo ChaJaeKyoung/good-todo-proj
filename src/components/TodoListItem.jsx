@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useCallback, useEffect, useState } from 'react';
 import styled, { css } from "styled-components";
 import { BsSquare as UncheckBox, BsCheckSquareFill as CheckedBox, BsTrash as Trash, BsPencilSquare as Pencil } from "react-icons/bs";
 
@@ -79,11 +79,12 @@ const Modify = styled.div`
 function TodoListItem(props) {
   const { todo: { id, text, checked, modify_check }, onRemove, onToggle, onModify, onModifySubmit, onModifyCancel } = props;
   
-  const [value, setValue] = useState('');
+  const [value, setValue] = useState(text);
   
-  const handleInputChange = (e) => {
+  const handleInputChange = useCallback((e) => {
+    
     setValue(e.target.value);
-};
+},[]);
   return (
     <TodoListItemWrapper>
     
@@ -93,7 +94,8 @@ function TodoListItem(props) {
         {
           
           modify_check == true ? 
-          <TextUpdate value={text} onChange={() => console.log("g"+value+"a")}/> : 
+          
+          <TextUpdate value={value} onChange={ handleInputChange }/> : 
           <Text checked={checked}>{text}</Text>
         }
       
@@ -106,10 +108,10 @@ function TodoListItem(props) {
           
         modify_check == true ? 
         <>
-        <Modify onClick={() => { onModifySubmit(id, text); }}>수정완료</Modify>
+        <Modify onClick={() => { onModifySubmit(id, value); }}>수정완료</Modify>
         <Modify onClick={() => { onModifyCancel(id); }}>취소</Modify> 
         </> :
-        <Modify onClick={() => { onModify(id, modify_check); }}>
+        <Modify onClick={() => { onModify(id); }}>
           <Pencil />
         </Modify>
       }
