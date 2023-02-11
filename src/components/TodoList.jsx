@@ -10,6 +10,7 @@ const TodoListWrapper = styled.div`
 
 function TodoList(props) {
   const { todos, onRemove, onToggle, onModify, onModifySubmit, onModifyCancel } = props;
+  
   return (
     <TodoListWrapper>
       {todos.map((todo) => {
