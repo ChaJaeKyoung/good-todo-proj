@@ -81,6 +81,8 @@ function App(props) {
   // 화면에 뿌려줄 todos 상태 
   const [todos, setTodos] = useState([]);
 
+  
+  
   // 로컬 스토리지에서 남아있는 객체데이터 가져오기
   useEffect(() => {
     const dbTodos = JSON.parse(localStorage.getItem('todos')) || [...todos];
@@ -136,7 +138,7 @@ function App(props) {
   // 수정 버튼 누르면
   // 해당리스트 아이템이 활성화되면서
   // 
-  const handleModify = useCallback((id, modify_check)=>{
+  const handleModify = useCallback((id)=>{
     setTodos(
       todos.map((todo) => {
         if (todo.id === id) {
