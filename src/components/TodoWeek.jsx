@@ -1,5 +1,5 @@
 import React from 'react';
-
+import styled, { css } from "styled-components";
 // 이번주 요일에 맞춰서 날짜를 보여주는 컴포넌트
 
 // my-coding-idea
@@ -27,11 +27,35 @@ import React from 'react';
 
 // 저번주와 다음주는 다음에 생각
 
+
+const TodoWeekWrapper = styled.div`
+  display:flex;
+  justify-content: center;
+`;
+
+const OnedayAWeek = styled.div`
+  background-color: #fff;
+  flex: 1;
+  padding: 10px;
+  text-align: center;
+
+  & + & {
+    border-left: 1px solid #a2a2a2;
+  }
+`;
+
+
 function TodoWeek(props) {
   return (
-    <div>
-      
-    </div>
+    <TodoWeekWrapper>
+      <OnedayAWeek>일</OnedayAWeek>
+      <OnedayAWeek>월</OnedayAWeek>
+      <OnedayAWeek>화</OnedayAWeek>
+      <OnedayAWeek>수</OnedayAWeek>
+      <OnedayAWeek>목</OnedayAWeek>
+      <OnedayAWeek>금</OnedayAWeek>
+      <OnedayAWeek>토</OnedayAWeek>
+    </TodoWeekWrapper>
   );
 }
 

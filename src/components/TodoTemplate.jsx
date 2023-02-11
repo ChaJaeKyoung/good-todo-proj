@@ -1,5 +1,6 @@
 import React from 'react';
 import styled from "styled-components";
+import TodoWeek from './TodoWeek';
 
 const TodoTemplateWrapper = styled.div`
   width: 500px;
@@ -34,6 +35,7 @@ function TodoTemplate(props) {
   return (
     <TodoTemplateWrapper>
       <div>{year}</div>
+      <TodoWeek/>
       {/* <div className="app-week">{week}</div> */}
       <div className="app-today">
       <div>

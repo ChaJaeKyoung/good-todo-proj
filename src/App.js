@@ -197,7 +197,7 @@ function App(props) {
             </div>
           }
         >
-          <TodoWeek />
+          
           <TodoInsert onInsert={handleInsert} />
           <TodoList todos={todos} onRemove={handleRemove} onToggle={handleToggle} onModify={handleModify} onModifySubmit={handleModifySubmit} onModifyCancel={handleModifyCancel}/>
         </TodoTemplate>
