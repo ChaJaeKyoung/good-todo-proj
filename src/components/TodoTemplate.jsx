@@ -6,7 +6,7 @@ const TodoTemplateWrapper = styled.div`
   width: 500px;
   margin: 0 auto;
   margin-top: 6rem;
-  border-radius: 4px;
+  border-radius: 10px;
   overflow: hidden;
 
   /* .app-week {
@@ -27,6 +27,11 @@ const TodoTemplateWrapper = styled.div`
   }
   
 `;
+const Year = styled.div`
+  width: 100%; 
+  padding: 10px;
+  background-color: ${props => props.theme.bodyBg};
+`;
 
 function TodoTemplate(props) {
   const { year, week, today } = props;
@@ -34,7 +39,9 @@ function TodoTemplate(props) {
   const { children } = props;
   return (
     <TodoTemplateWrapper>
-      <div>{year}</div>
+      <Year>
+        {year}
+      </Year>
       <TodoWeek/>
       {/* <div className="app-week">{week}</div> */}
       <div className="app-today">

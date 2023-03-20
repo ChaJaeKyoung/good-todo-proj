@@ -1,5 +1,6 @@
 import React from 'react';
 import styled, { css } from "styled-components";
+import { format } from "date-fns";
 // 이번주 요일에 맞춰서 날짜를 보여주는 컴포넌트
 
 // my-coding-idea
@@ -34,11 +35,11 @@ const TodoWeekWrapper = styled.div`
 `;
 
 const OnedayAWeek = styled.div`
-  background-color: #fff;
+  background-color: ${props => props.theme.bodyBg};
   flex: 1;
   padding: 10px;
   text-align: center;
-
+  border-top: 1px solid #a2a2a2;
   & + & {
     border-left: 1px solid #a2a2a2;
   }
@@ -46,15 +47,16 @@ const OnedayAWeek = styled.div`
 
 
 function TodoWeek(props) {
+  const weeks = ['일', '월', '화', '수', '목', '금', '토'];
+  const selectedDate = new Date();
+  const startDate = startOfWeek(startOfMonth(selectedDate));
+
   return (
     <TodoWeekWrapper>
-      <OnedayAWeek>일</OnedayAWeek>
-      <OnedayAWeek>월</OnedayAWeek>
-      <OnedayAWeek>화</OnedayAWeek>
-      <OnedayAWeek>수</OnedayAWeek>
-      <OnedayAWeek>목</OnedayAWeek>
-      <OnedayAWeek>금</OnedayAWeek>
-      <OnedayAWeek>토</OnedayAWeek>
+      {weeks.map((dayName)=>(
+        <OnedayAWeek key={dayName}>{dayName}{startDate}</OnedayAWeek>
+      ))}
+      
     </TodoWeekWrapper>
   );
 }
